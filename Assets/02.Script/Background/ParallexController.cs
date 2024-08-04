@@ -40,7 +40,7 @@ namespace SangheeCat{
             }
         }
 
-        void FixedUpdate () {
+        void LateUpdate () {
             float zoom = _cam.orthographicSize / startZoomSize;
             foreach (var layer in layers)
             {
