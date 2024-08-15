@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: Ground Terrain2DMaterial
   m_EditorClassIdentifier: 
   scale: 1
-  offset: -1.1
+  offset: -0.25
   grounds:
     textureOrder: 0
     layer: 0
     materialInfos:
-    - sprite: {fileID: 21300000, guid: ebb5ad81ba77b0f499922b16913d2cea, type: 3}
+    - sprite: {fileID: 21300000, guid: 8bdf0c629620c494f93302c9f5337626, type: 3}
+      rotation: 0
+      stretchType: 0
+      stretchValue: 0.5
+      scale: {x: 1, y: 1}
+      offset: {x: 0, y: 0}
+    - sprite: {fileID: 21300000, guid: 6872616308640734996f87e4b416559a, type: 3}
       rotation: 0
       stretchType: 0
       stretchValue: 0.5
