@@ -9,14 +9,15 @@ public class Player : MonoBehaviour
     [SerializeField] private InputActionAsset _inputActionAsset;
     [SerializeField] private InputActionReference _jumpAction;
     [Header("Physics Variables")]
+    public Rigidbody2D rb;
     public float gravity;
     public Vector2 velocity;
-    public float maxXVelocity = 100;
+    public float maxXVelocity = 50;
     public float maxAcceleration = 10;
     public float acceleration = 10;
     public float distance = 0;
-    public float jumpVelocity = 20;
-    public float groundHeight = 10;
+    public float jumpVelocity = 50;
+    public float groundHeight = 4;
     public bool isGrounded = false;
 
     public bool isHoldingJump = false;
@@ -37,8 +38,9 @@ public class Player : MonoBehaviour
     public LayerMask groundLayerMask;
     public LayerMask obstacleLayerMask;
 
-    void Start()
+    void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
     }
     
     private void OnEnable()
@@ -61,6 +63,7 @@ public class Player : MonoBehaviour
             if (_jumpAction.action.triggered)
             {
                 isGrounded = false;
+                rb.AddForce(Vector2.up * (jumpVelocity * 20f), ForceMode2D.Impulse);
                 velocity.y = jumpVelocity;
                 isHoldingJump = true;
                 holdJumpTimer = 0;

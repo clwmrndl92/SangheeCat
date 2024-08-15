@@ -1670,6 +1670,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &1096378187 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 671208529378861268, guid: 39af647cec49e04488883e1177aaed40, type: 3}
+  m_PrefabInstance: {fileID: 2027594390}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1181786372
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,6 +2995,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 671208529378861268, guid: 39af647cec49e04488883e1177aaed40, type: 3}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 671208529378861268, guid: 39af647cec49e04488883e1177aaed40, type: 3}
+      propertyPath: m_GravityScale
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 671208529378861268, guid: 39af647cec49e04488883e1177aaed40, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3200275202288348325, guid: 39af647cec49e04488883e1177aaed40, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.1
@@ -3030,9 +3047,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4163601383024663037, guid: 39af647cec49e04488883e1177aaed40, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899373472665694551, guid: 39af647cec49e04488883e1177aaed40, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1096378187}
+    - target: {fileID: 5031275011108145601, guid: 39af647cec49e04488883e1177aaed40, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6295789015426460055, guid: 39af647cec49e04488883e1177aaed40, type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297688011010744193, guid: 39af647cec49e04488883e1177aaed40, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9126158587276957301, guid: 39af647cec49e04488883e1177aaed40, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
