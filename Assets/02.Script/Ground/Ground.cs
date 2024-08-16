@@ -93,7 +93,7 @@ public class Ground : MonoBehaviour
         float t2 = Mathf.Sqrt((2.0f * (maxY - actualY)) / -player.gravity);
         float totalTime = t1 + t2;
         float maxX = totalTime * player.velocity.x;
-        maxX *= 0.7f;
+        maxX *= 0.5f;
         maxX += groundRight;
         float minX = screenRight + 5;
         float actualX = Random.Range(minX, maxX);

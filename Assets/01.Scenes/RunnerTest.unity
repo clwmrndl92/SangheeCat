@@ -3030,10 +3030,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4009904986965056580, guid: 39af647cec49e04488883e1177aaed40, type: 3}
-      propertyPath: m_AngleLimits.m_LowerAngle
-      value: -45
-      objectReference: {fileID: 0}
     - target: {fileID: 6295789015426460055, guid: 39af647cec49e04488883e1177aaed40, type: 3}
       propertyPath: m_Name
       value: Character

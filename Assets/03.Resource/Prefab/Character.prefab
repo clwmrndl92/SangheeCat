@@ -1321,6 +1321,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7651363032254933993}
+  - component: {fileID: 2909312091655010356}
+  - component: {fileID: 4017242183772436412}
   - component: {fileID: 3532907432608649024}
   - component: {fileID: 8224971789424884760}
   - component: {fileID: 4009904986965056580}
@@ -1350,6 +1352,43 @@ Transform:
   - {fileID: 4133391068943879295}
   m_Father: {fileID: 3200275202288348325}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2909312091655010356
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2861676901697201487}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e48feb012d0c2f6489764af6dfd30bb6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4017242183772436412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2861676901697201487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c33ac845bc818c4f9600ba4b8fa0a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bigWheel: {fileID: 6886127544866301878}
+  _smallWheel:
+  - {fileID: 4625052074067572278}
+  - {fileID: 1856351883351805131}
 --- !u!50 &3532907432608649024
 Rigidbody2D:
   serializedVersion: 4
@@ -1462,7 +1501,7 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -30
+    m_LowerAngle: -45
     m_UpperAngle: 30
 --- !u!1 &4265996076544842907
 GameObject:
@@ -2640,8 +2679,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3200275202288348325}
-  - component: {fileID: 577661341405120120}
-  - component: {fileID: 5617045201704603455}
   - component: {fileID: 4899373472665694551}
   - component: {fileID: 2882537384971339304}
   m_Layer: 0
@@ -2669,43 +2706,6 @@ Transform:
   - {fileID: 5699642481172142002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &577661341405120120
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6295789015426460055}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e48feb012d0c2f6489764af6dfd30bb6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5617045201704603455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6295789015426460055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c33ac845bc818c4f9600ba4b8fa0a94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bigWheel: {fileID: 6886127544866301878}
-  _smallWheel:
-  - {fileID: 4625052074067572278}
-  - {fileID: 1856351883351805131}
 --- !u!114 &4899373472665694551
 MonoBehaviour:
   m_ObjectHideFlags: 0
