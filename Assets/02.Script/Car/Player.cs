@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
             if (_jumpAction.action.triggered)
             {
                 isGrounded = false;
-                rb.AddForce(Vector2.up * (jumpVelocity * 20f), ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * (jumpVelocity * 10f), ForceMode2D.Impulse);
                 velocity.y = jumpVelocity;
                 isHoldingJump = true;
                 holdJumpTimer = 0;
