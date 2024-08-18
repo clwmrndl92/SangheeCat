@@ -50,3 +50,6 @@ TagManager:
   - name: Foregound
     uniqueID: 217001389
     locked: 0
+  - name: Effect
+    uniqueID: 3495639819
+    locked: 0

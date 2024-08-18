@@ -7,6 +7,7 @@ using UnityEngine.Playables;
 public class TimelineManager : MonoBehaviour
 {
 
+    [SerializeField] private PlayableAsset _intro;
     [SerializeField] private PlayableAsset _epilogue;
     [SerializeField] private PlayableDirector _director;
     private static TimelineManager _instance;
@@ -19,13 +20,17 @@ public class TimelineManager : MonoBehaviour
         }
     }
 
-    public static UnityEvent OnIntroEnd = new UnityEvent();
-
     private void Awake() {
         if(_instance == null) 
             _instance = this;
     }
 
+    public static UnityEvent OnIntroEnd = new UnityEvent();
+
+    public void IntroStart() {
+        _director.Play(_intro);
+        Debug.Log("Intro Start!");
+    }
     public void IntroEnd() {
         OnIntroEnd.Invoke();
         Debug.Log("Intro End Invoke!");
