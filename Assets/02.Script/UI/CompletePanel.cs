@@ -35,8 +35,14 @@ public class CompletePanel : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         Time.timeScale = 1;
     }
-    private void OnClickQuitBtn(){
-        // Quit Game (Editor also)
-        Application.Quit();
+    private void OnClickQuitBtn()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_WEBPLAYER
+            Application.OpenURL(webplayerQuitURL);
+        #else
+            Application.Quit();
+        #endif
     }
 }

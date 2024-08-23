@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 8770845289691106709}
   - component: {fileID: 8596812169837813844}
   - component: {fileID: 7212853613225989078}
+  - component: {fileID: 4689332951206591270}
   m_Layer: 7
   m_Name: Obstacle_Scarecrow
   m_TagString: Untagged
@@ -371,6 +372,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &4689332951206591270
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6565032123534089075}
+  m_Enabled: 1
+  m_SortingLayerID: -1171992359
+  m_SortingLayer: 1
+  m_SortingOrder: 2
+  m_SortAtRoot: 0
 --- !u!1 &6803809958787253253
 GameObject:
   m_ObjectHideFlags: 0

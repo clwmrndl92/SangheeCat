@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public GameObject completePanel;
+    public TimelineManager timelineManager;
     [Header("입력")]
     [SerializeField] private InputActionAsset _inputActionAsset;
     [SerializeField] public InputActionReference _jumpAction;
@@ -90,9 +91,9 @@ public class Player : MonoBehaviour
         }
     }
     
-    IEnumerator Dead()
+    IEnumerator Dead(float delay)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(delay);
         completePanel.SetActive(true);
     }
 
@@ -108,6 +109,15 @@ public class Player : MonoBehaviour
             return;
         }
 
+        if (distance > 1000)
+        {
+            isCinema = true;
+            velocity.x = 0;
+            StartCoroutine(Dead(8f));
+            timelineManager.EpilogueStart();
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+
         Vector2 pos = groundRayOrigins.First().position;
 
         // Check if player is dead
@@ -116,7 +126,7 @@ public class Player : MonoBehaviour
             velocity.x = 0;
             isDead = true;
             Debug.Log("Dead");
-            StartCoroutine(Dead());
+            StartCoroutine(Dead(1f));
         }
 
         if (!isGrounded)

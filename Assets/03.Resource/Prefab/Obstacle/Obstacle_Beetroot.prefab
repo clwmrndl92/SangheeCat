@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2127152616858274918}
   - component: {fileID: 4258672005298646633}
   - component: {fileID: 3339509682178795917}
+  - component: {fileID: 7776010613990584796}
   m_Layer: 8
   m_Name: Obstacle_Beetroot
   m_TagString: Untagged
@@ -169,3 +170,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &7776010613990584796
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055852571029260840}
+  m_Enabled: 1
+  m_SortingLayerID: -1171992359
+  m_SortingLayer: 1
+  m_SortingOrder: 2
+  m_SortAtRoot: 0

@@ -4,6 +4,7 @@ namespace SangheeCat{
 
     public class ParallaxController : MonoBehaviour
     {
+        Player player;
 
         [System.Serializable]
         public class ParallaxLayer
@@ -27,6 +28,7 @@ namespace SangheeCat{
 
         void Start()
         {
+            player = GameObject.Find("Player").GetComponent<Player>();
             _cam = Camera.main;
             startZoomSize = Camera.main.orthographicSize;
             
@@ -44,7 +46,7 @@ namespace SangheeCat{
             float zoom = _cam.orthographicSize / startZoomSize;
             foreach (var layer in layers)
             {
-                float speed = layer.parallaxFactor * Time.deltaTime;
+                float speed = layer.parallaxFactor * player.velocity.x * Time.deltaTime;
                 
                 // Disable movement
                 layer.layerObject.transform.position = new Vector3(layer.layerObject.transform.position.x - speed, layer.layerObject.transform.position.y, layer.layerObject.transform.position.z);

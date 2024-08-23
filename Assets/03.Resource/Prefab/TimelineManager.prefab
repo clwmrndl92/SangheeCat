@@ -825,6 +825,7 @@ MonoBehaviour:
   _intro: {fileID: 11400000, guid: a7d8fd479fef11a48b8ef35fc2f97f83, type: 2}
   _epilogue: {fileID: 11400000, guid: b83adb3074cf24a4e804d261b1bf60be, type: 2}
   _director: {fileID: 66581746987581292}
+  player: {fileID: 0}
 --- !u!114 &3087273816853893649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3120,7 +3121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7020023195379370523
 Transform:
   m_ObjectHideFlags: 0
@@ -6435,14 +6436,6 @@ PrefabInstance:
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3200275202288348325, guid: 39af647cec49e04488883e1177aaed40, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3200275202288348325, guid: 39af647cec49e04488883e1177aaed40, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.024
-      objectReference: {fileID: 0}
-    - target: {fileID: 3200275202288348325, guid: 39af647cec49e04488883e1177aaed40, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
@@ -6484,7 +6477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4009904986965056580, guid: 39af647cec49e04488883e1177aaed40, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -3.7
+      value: -3.7000003
       objectReference: {fileID: 0}
     - target: {fileID: 4009904986965056580, guid: 39af647cec49e04488883e1177aaed40, type: 3}
       propertyPath: m_ConnectedAnchor.y

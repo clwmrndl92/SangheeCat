@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8711491791318233601}
   - component: {fileID: 3810500795853048089}
   - component: {fileID: 2477508608041684868}
+  - component: {fileID: 5184163758629462320}
   m_Layer: 8
   m_Name: Obstacle_Carrot
   m_TagString: Untagged
@@ -169,3 +170,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &5184163758629462320
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492806882824253097}
+  m_Enabled: 1
+  m_SortingLayerID: -1171992359
+  m_SortingLayer: 1
+  m_SortingOrder: 2
+  m_SortAtRoot: 0
