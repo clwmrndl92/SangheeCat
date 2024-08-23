@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public GameObject completePanel;
     [Header("입력")]
     [SerializeField] private InputActionAsset _inputActionAsset;
     [SerializeField] public InputActionReference _jumpAction;
@@ -89,10 +90,10 @@ public class Player : MonoBehaviour
         }
     }
     
-    IEnumerator Retry()
+    IEnumerator Dead()
     {
-        yield return new WaitForSeconds(1.5f);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        yield return new WaitForSeconds(1f);
+        completePanel.SetActive(true);
     }
 
     private void FixedUpdate()
@@ -114,7 +115,8 @@ public class Player : MonoBehaviour
         {
             velocity.x = 0;
             isDead = true;
-            StartCoroutine(Retry());
+            Debug.Log("Dead");
+            StartCoroutine(Dead());
         }
 
         if (!isGrounded)

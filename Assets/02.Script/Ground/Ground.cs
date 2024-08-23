@@ -100,7 +100,7 @@ public class Ground : MonoBehaviour
             float t2 = Mathf.Sqrt((2.0f * maxJumpHeight * 0.7f) / -player.gravity);
             float totalTime = t1 + t2;
             float maxX = totalTime * player.velocity.x;
-            maxX *= 0.6f;
+            maxX *= 0.5f;
             float gapX = Random.Range(maxX * 0.25f, maxX);
             
             pos.x = groundRight + goCollider.size.x / 2 + gapX;

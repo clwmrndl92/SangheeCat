@@ -6,29 +6,37 @@ using UnityEngine.UI;
 
 public class CompletePanel : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _distanceText;
-    [SerializeField] TextMeshProUGUI _carrotText;
+    [SerializeField] public TextMeshProUGUI _distanceText;
+    [SerializeField] public TextMeshProUGUI _carrotText;
     [SerializeField] Button _retryBtn;
     [SerializeField] Button _quitBtn;
     [SerializeField] Animator _panelAnimator;
+    
+    private Player _player;
 
     void Start()
     {
-        _distanceText.text = $": {9999}m";
-        _carrotText.text = $": {999}/{999}";
+        _player = GameObject.Find("Player").GetComponent<Player>();
+        
+        _distanceText.text = (int)_player.distance + "m";
+        _carrotText.text = "0";
 
-        _retryBtn.onClick.AddListener(OnClickBtn);
-        _quitBtn.onClick.AddListener(OnClickBtn);
-
-        gameObject.SetActive(false);
+        _retryBtn.onClick.AddListener(OnClickRetryBtn);
+        _quitBtn.onClick.AddListener(OnClickQuitBtn);
     }
 
     public void BuildCompletePanel(int diatance, int carrot, int carrotMax) {
         _distanceText.text = $": {diatance}m";
-        _carrotText.text = $": {carrot}/{carrotMax}";
+        _carrotText.text = $": {carrot}";
     }
     
-    private void OnClickBtn(){
-        Debug.Log("Click");
+    private void OnClickRetryBtn(){
+        // Reload Scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        Time.timeScale = 1;
+    }
+    private void OnClickQuitBtn(){
+        // Quit Game (Editor also)
+        Application.Quit();
     }
 }

@@ -663,7 +663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4009904986965056580, guid: 39af647cec49e04488883e1177aaed40, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.94999987
+      value: -0.9499999
       objectReference: {fileID: 0}
     - target: {fileID: 4009904986965056580, guid: 39af647cec49e04488883e1177aaed40, type: 3}
       propertyPath: m_AngleLimits.m_LowerAngle
@@ -697,6 +697,10 @@ PrefabInstance:
       propertyPath: _pickupAction
       value: 
       objectReference: {fileID: -244064765275869283, guid: 95d801d76ebb52246954d79007983a79, type: 3}
+    - target: {fileID: 4899373472665694551, guid: 39af647cec49e04488883e1177aaed40, type: 3}
+      propertyPath: completePanel
+      value: 
+      objectReference: {fileID: 1641959814}
     - target: {fileID: 4899373472665694551, guid: 39af647cec49e04488883e1177aaed40, type: 3}
       propertyPath: maxAcceleration
       value: 3
@@ -1022,6 +1026,11 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3064511351699996180, guid: baf8be7a25b850542a1e105f5f548466, type: 3}
   m_PrefabInstance: {fileID: 5693684953292437255}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1641959814 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 415126675534632162, guid: 72d7a197f1d536142a91bab74209c2e8, type: 3}
+  m_PrefabInstance: {fileID: 1253337063897210667}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1688560747 stripped
 GameObject:
