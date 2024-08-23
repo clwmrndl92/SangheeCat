@@ -54,6 +54,8 @@ public class MainPanel : MonoBehaviour
             return;
         }
         _distanceRecordText.text = (int)_player.distance + "m";
+        _carrotRecordText.text = _player.currentCarrotNum+"/"+_player.maxCarrotNum;
+        _carrotText.text = _player.totalCarrotNum.ToString();
     }
     
     public void SetRecordText(float distance, int carrot, int totalCarrot) {

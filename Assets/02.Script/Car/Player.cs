@@ -49,10 +49,22 @@ public class Player : MonoBehaviour
     public Transform pulloutEnd;
     public Transform pulloutBezier;
 
+    public int totalCarrotNum;
+    public int currentCarrotNum = 0;
+    public int maxCarrotNum;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();   
         _animator = GetComponentInChildren<Animator>();
+        
+    	if(!PlayerPrefs.HasKey("carrot"))
+    	    PlayerPrefs.SetInt("carrot", 0);
+    	if(!PlayerPrefs.HasKey("maxCarrot"))
+    	    PlayerPrefs.SetInt("carrot", 0);
+        totalCarrotNum = PlayerPrefs.GetInt("carrot");
+        maxCarrotNum = PlayerPrefs.GetInt("maxCarrot");
+        currentCarrotNum = 0;
     }
     
     private void OnEnable()
@@ -98,6 +110,10 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         completePanel.SetActive(true);
+        
+        PlayerPrefs.SetInt("carrot", totalCarrotNum);
+        if(maxCarrotNum < currentCarrotNum)
+            PlayerPrefs.SetInt("maxCarrot", currentCarrotNum);
     }
 
     private void FixedUpdate()
@@ -296,7 +312,8 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Good Carrot");
             //TODO: 점수 증가
-            
+            totalCarrotNum += 1;
+            currentCarrotNum += 1;
             //TODO: Obstacle 애니메이션 재생
             obstacle.pullOut();
         }
