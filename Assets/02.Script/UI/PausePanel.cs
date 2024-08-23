@@ -12,15 +12,27 @@ public class PausePanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _retryBtn.onClick.AddListener(()=>Debug.Log("retry"));
-        _quitBtn.onClick.AddListener(()=>Debug.Log("quit"));
-        _continueBtn.onClick.AddListener(()=>Debug.Log("continue"));
+        _retryBtn.onClick.AddListener(Retry);
+        _quitBtn.onClick.AddListener(Quit);
+        _continueBtn.onClick.AddListener(Continue);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Retry()
     {
-        
+        // Reload Scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+    
+    public void Quit()
+    {
+        // Quit Game (Editor also)
+        Application.Quit();
+    }
+    
+    public void Continue()
+    {
+        // Continue Game
+        Time.timeScale = 1;
     }
 
 }

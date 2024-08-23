@@ -10,7 +10,18 @@ public class DistanceMeter : MonoBehaviour
     [SerializeField] private Transform _end;
     
     [Tooltip("0~1")] public float position = 0;
+    
+    private Player _player;
+    public float Goal = 1000;
 
+    private void Awake()
+    {
+        _player = GameObject.Find("Player").GetComponent<Player>();
+        
+        //TODO: SetRecord from save data
+        SetRecord(0.5f, true);
+    }
+    
     /// <summary>
     /// position : 0 ~ 1
     /// </summary>
@@ -25,5 +36,11 @@ public class DistanceMeter : MonoBehaviour
     public void SetRecord(float position, bool setActive = true){
         _record.transform.position = Vector3.Lerp(_start.position, _end.position, position);
         _record.SetActive(setActive);
+    }
+    
+    private void FixedUpdate()
+    {
+        position = _player.distance / Goal;
+        SetPoint(position);
     }
 }

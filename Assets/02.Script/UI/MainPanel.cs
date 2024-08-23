@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -47,5 +48,10 @@ public class MainPanel : MonoBehaviour
     }
     public void OnClickJumpBtn() {
         _pullBtn.image.color = _pullBtn.colors.pressedColor;
+    }
+    public void OnClickOptionBtn() {
+        _pullBtn.image.color = _pullBtn.colors.pressedColor;
+        // Pause Game
+        Time.timeScale = 0;
     }
 }
