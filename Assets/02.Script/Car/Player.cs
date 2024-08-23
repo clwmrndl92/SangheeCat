@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
     [Header("입력")]
     [SerializeField] private InputActionAsset _inputActionAsset;
     [SerializeField] private InputActionReference _jumpAction;
+    [SerializeField] private InputActionReference _pickupAction;
     [Header("Physics Variables")]
     public Rigidbody2D rb;
     public float gravity;
@@ -17,8 +19,9 @@ public class Player : MonoBehaviour
     public float acceleration = 10;
     public float distance = 0;
     public float jumpVelocity = 50;
-    public float groundHeight = 4;
-    public bool isGrounded = false;
+    //TODO: groundHeight 상수로 변경
+    public float groundHeight = -2;
+    public bool isGrounded = true;
 
     public bool isHoldingJump = false;
     public float maxHoldJumpTime = 0.4f;
@@ -28,19 +31,24 @@ public class Player : MonoBehaviour
     public float jumpGroundThreshold = 1;
 
     public bool isDead = false;
+    public bool isCinema = true;
 
-    public Transform frontGroundRayOrigin;
-    public Transform rearGroundRayOrigin;
+    public Transform[] groundRayOrigins;
     public Transform wallRayOrigin;
-    public Transform obstacleRayOrigin;
+    public Transform[] obstacleForwardRayOrigins;
+    public Transform[] obstacleDownwardRayOrigins;
     
 
     public LayerMask groundLayerMask;
     public LayerMask obstacleLayerMask;
+    public LayerMask pickupLayerMask;
+    
+    private Animator _animator;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();   
+        _animator = GetComponentInChildren<Animator>();
     }
     
     private void OnEnable()
@@ -55,7 +63,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Vector2 pos = frontGroundRayOrigin.position;
+        Vector2 pos = groundRayOrigins.First().position;
         float groundDistance = Mathf.Abs(pos.y - groundHeight);
 
         if (isGrounded || groundDistance <= jumpGroundThreshold)
@@ -63,8 +71,8 @@ public class Player : MonoBehaviour
             if (_jumpAction.action.triggered)
             {
                 isGrounded = false;
-                rb.AddForce(Vector2.up * (jumpVelocity * 10f), ForceMode2D.Impulse);
                 velocity.y = jumpVelocity;
+                rb.velocity = Vector2.up * jumpVelocity;
                 isHoldingJump = true;
                 holdJumpTimer = 0;
             }
@@ -74,6 +82,17 @@ public class Player : MonoBehaviour
         {
             isHoldingJump = false;
         }
+        
+        if(_pickupAction.action.triggered)
+        {
+            Debug.Log("Pickup");
+        }
+    }
+    
+    IEnumerator Retry()
+    {
+        yield return new WaitForSeconds(1.5f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
     private void FixedUpdate()
@@ -83,12 +102,19 @@ public class Player : MonoBehaviour
             return;
         }
 
-        Vector2 pos = frontGroundRayOrigin.position;
+        if (isCinema)
+        {
+            return;
+        }
+
+        Vector2 pos = groundRayOrigins.First().position;
 
         // Check if player is dead
         if (pos.y < -20)
         {
+            velocity.x = 0;
             isDead = true;
+            StartCoroutine(Retry());
         }
 
         if (!isGrounded)
@@ -102,33 +128,39 @@ public class Player : MonoBehaviour
                 }
             }
 
-            pos.y += velocity.y * Time.fixedDeltaTime;
             if (!isHoldingJump)
             {
                 velocity.y += gravity * Time.fixedDeltaTime;
+                rb.velocity += Vector2.up * (gravity * Time.fixedDeltaTime);
             }
 
-            Vector2 rayOrigin = frontGroundRayOrigin.position;
-            Vector2 rayDirection = Vector2.up;
-            float rayDistance = velocity.y * Time.fixedDeltaTime;
-            RaycastHit2D hit2D = Physics2D.Raycast(rayOrigin, rayDirection, rayDistance, groundLayerMask);
-            if (hit2D.collider != null)
+            // groundRayOrigins들을 순회하며 레이캐스트를 쏴서 땅에 닿았는지 확인, 하나라도 닿았으면 빠져나와 break
+            foreach (var groundRayOrigin in groundRayOrigins)
             {
-                Ground ground = hit2D.collider.GetComponent<Ground>();
-                if (ground != null)
+                Vector2 rayOrigin = groundRayOrigin.position;
+                Vector2 rayDirection = Vector2.up;
+                float rayDistance = velocity.y * Time.fixedDeltaTime;
+                RaycastHit2D hit2D = Physics2D.Raycast(rayOrigin, rayDirection, rayDistance, groundLayerMask);
+                Debug.DrawRay(rayOrigin, rayDirection * rayDistance, Color.red);
+                if (hit2D.collider != null)
                 {
-                    if (pos.y >= ground.groundHeight)
+                    Ground ground = hit2D.collider.GetComponent<Ground>();
+                    if (ground != null)
                     {
-                        groundHeight = ground.groundHeight;
-                        pos.y = groundHeight;
-                        velocity.y = 0;
-                        isGrounded = true;
+                        //TODO: groundHeight 상수로 변경
+                        if (pos.y >= ground.groundHeight)
+                        {
+                            groundHeight = ground.groundHeight;
+                            pos.y = groundHeight;
+                            velocity.y = 0;
+                            rb.velocity = Vector2.zero;
+                            isGrounded = true;
+                            break;
+                        }
                     }
                 }
             }
-            Debug.DrawRay(rayOrigin, rayDirection * rayDistance, Color.red);
-
-
+            
             Vector2 wallOrigin = wallRayOrigin.position;
             Vector2 wallDir = Vector2.right;
             RaycastHit2D wallHit = Physics2D.Raycast(wallOrigin, wallDir, velocity.x * Time.fixedDeltaTime, groundLayerMask);
@@ -160,7 +192,7 @@ public class Player : MonoBehaviour
             }
 
 
-            Vector2 rayOrigin = rearGroundRayOrigin.position;
+            Vector2 rayOrigin = groundRayOrigins.Last().position;
             Vector2 rayDirection = Vector2.up;
             float rayDistance = velocity.y * Time.fixedDeltaTime;
             RaycastHit2D hit2D = Physics2D.Raycast(rayOrigin, rayDirection, rayDistance);
@@ -172,36 +204,83 @@ public class Player : MonoBehaviour
 
         }
 
-        Vector2 obstOrigin = obstacleRayOrigin.position;
-        // Check forward collision
-        RaycastHit2D obstHitX = Physics2D.Raycast(obstOrigin, Vector2.right, velocity.x * Time.fixedDeltaTime, obstacleLayerMask);
-        if (obstHitX.collider != null)
+        // obstacleRayOrigins들을 순회하며 레이캐스트를 쏴서 장애물에 닿았는지 확인
+        // 전방
+        foreach (var obstacleRayOrigin in obstacleForwardRayOrigins)
         {
-            Obstacle obstacle = obstHitX.collider.GetComponent<Obstacle>();
-            if (obstacle != null)
+            Vector2 obstOrigin = obstacleRayOrigin.position;
+            // Check forward collision
+            RaycastHit2D obstHitX = Physics2D.Raycast(obstOrigin, Vector2.right, velocity.x * Time.fixedDeltaTime, obstacleLayerMask);
+            if (obstHitX.collider != null)
             {
-                hitObstacle(obstacle);
+                Obstacle obstacle = obstHitX.collider.GetComponent<Obstacle>();
+                if (obstacle != null)
+                {
+                    hitObstacle(obstacle);
+                }
             }
         }
-
-        // Check downward collision
-        RaycastHit2D obstHitY = Physics2D.Raycast(obstOrigin, Vector2.up, velocity.y * Time.fixedDeltaTime, obstacleLayerMask);
-        if (obstHitY.collider != null)
+        // 하단
+        foreach (var obstacleRayOrigin in obstacleDownwardRayOrigins)
         {
-            Obstacle obstacle = obstHitY.collider.GetComponent<Obstacle>();
-            if (obstacle != null)
+            Vector2 obstOrigin = obstacleRayOrigin.position;
+            // Check downward collision
+            RaycastHit2D obstHitY = Physics2D.Raycast(obstOrigin, Vector2.up, velocity.y * Time.fixedDeltaTime, obstacleLayerMask);
+            if (obstHitY.collider != null)
             {
-                hitObstacle(obstacle);
+                Obstacle obstacle = obstHitY.collider.GetComponent<Obstacle>();
+                if (obstacle != null)
+                {
+                    hitObstacle(obstacle);
+                }
             }
         }
     }
-
-
+    
     // 충돌 시 이벤트 작성
     void hitObstacle(Obstacle obstacle)
     {
         Destroy(obstacle.gameObject);
-        // 오브젝트 충돌 시 30% 감속
-        velocity.x *= 0.7f;
+        // 오브젝트 충돌 시 70% 감속
+        velocity.x *= 0f;
+        // Hurt 트리거로 Hurt 애니메이션 재생
+        _animator.SetTrigger("Hurt");
+    }
+
+    void checkPickup()
+    {
+        // 하단
+        foreach (var obstacleRayOrigin in obstacleDownwardRayOrigins)
+        {
+            Vector2 obstOrigin = obstacleRayOrigin.position;
+            // Check downward collision
+            RaycastHit2D obstHitY = Physics2D.Raycast(obstOrigin, Vector2.up, velocity.y * Time.fixedDeltaTime, pickupLayerMask);
+            if (obstHitY.collider != null)
+            {
+                Obstacle obstacle = obstHitY.collider.GetComponent<Obstacle>();
+                if (obstacle != null)
+                {
+                    pickupCrop(obstacle);
+                }
+            }
+        }
+    }
+    
+    void pickupCrop(Obstacle obstacle)
+    {
+        if (obstacle.isBad)
+        {
+            // 오브젝트 충돌 시 70% 감속
+            velocity.x *= 0f;
+            // Hurt 트리거로 Hurt 애니메이션 재생
+            _animator.SetTrigger("Hurt");
+            //TODO: Obstacle 애니메이션 재생
+        }
+        else
+        {
+            //TODO: 점수 증가
+            
+            //TODO: Obstacle 애니메이션 재생
+        }
     }
 }

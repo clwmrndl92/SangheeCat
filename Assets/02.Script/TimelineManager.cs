@@ -11,6 +11,8 @@ public class TimelineManager : MonoBehaviour
     [SerializeField] private PlayableAsset _epilogue;
     [SerializeField] private PlayableDirector _director;
     private static TimelineManager _instance;
+    
+    public Player player;
 
     public static TimelineManager Instance { 
         get {
@@ -23,6 +25,7 @@ public class TimelineManager : MonoBehaviour
     private void Awake() {
         if(_instance == null) 
             _instance = this;
+        OnIntroEnd.AddListener(OnIntroEndFunction);
     }
 
     public static UnityEvent OnIntroEnd = new UnityEvent();
@@ -38,5 +41,19 @@ public class TimelineManager : MonoBehaviour
     public void EpilogueStart() {
         _director.Play(_epilogue);
         Debug.Log("Epilogue Start!");
+    }
+
+    private void OnIntroEndFunction()
+    {
+        var ground = GameObject.Find("Ground_0").GetComponent<Ground>();
+        ground.screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, Camera.main.nearClipPlane)).x;
+        ground = GameObject.Find("Ground_1").GetComponent<Ground>();
+        ground.screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, Camera.main.nearClipPlane)).x;
+        ground = GameObject.Find("Ground_2").GetComponent<Ground>();
+        ground.screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, Camera.main.nearClipPlane)).x;
+        ground = GameObject.Find("Ground_3").GetComponent<Ground>();
+        ground.screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, Camera.main.nearClipPlane)).x;
+        
+        player.isCinema = false;
     }
 }

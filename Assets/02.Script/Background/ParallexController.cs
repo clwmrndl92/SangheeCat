@@ -47,7 +47,8 @@ namespace SangheeCat{
                 float temp = (_cam.transform.position.x * (1-layer.parallaxFactor));
                 float dist = (_cam.transform.position.x * layer.parallaxFactor);
                 
-                layer.layerObject.transform.position = new Vector3(layer.startPosX + dist, layer.layerObject.transform.position.y, layer.layerObject.transform.position.z);
+                // Disable movement
+                //layer.layerObject.transform.position = new Vector3(layer.startPosX + dist, layer.layerObject.transform.position.y, layer.layerObject.transform.position.z);
                 // if (temp > layer.startPosX + layer.length) layer.startPosX += 2*layer.length;
                 // else if (temp < layer.startPosX - layer.length) layer.startPosX -= 2*layer.length;
 
