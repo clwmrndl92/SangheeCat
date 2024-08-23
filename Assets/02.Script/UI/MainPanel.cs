@@ -3,10 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class MainPanel : MonoBehaviour
 {
+    Player _player;
+    
+    [SerializeField] private InputActionReference _optionAction;
+    public GameObject pausePanel;
+
+    [SerializeField] private GameObject _playerInfoPanel;
     [SerializeField] DistanceMeter _distanceMeter;
     [SerializeField] TextMeshProUGUI _distanceRecordText;
     [SerializeField] TextMeshProUGUI _carrotRecordText;
@@ -20,13 +27,44 @@ public class MainPanel : MonoBehaviour
     [SerializeField] GameObject _carrotPanel;
     [SerializeField] TextMeshProUGUI _carrotText;
     
+    private void OnEnable() {
+        _optionAction.action.performed += OnOptionActionTriggered;
+    }
+
+    private void OnDisable() {
+        _optionAction.action.performed -= OnOptionActionTriggered;
+    }
+
+    private void Awake()
+    {
+        _player = GameObject.Find("Player").GetComponent<Player>();
+        //TODO: SetRecordText from save data
+        SetRecordText(500, 12, 2024);
+    }
+
     private void Start() {
         _startButton.onClick.AddListener(SetGameUI);
         BuildStartUI();
     }
+    
+    private void FixedUpdate()
+    {
+        if (_player.isCinema)
+        {
+            return;
+        }
+        _distanceRecordText.text = (int)_player.distance + "m";
+    }
+    
+    public void SetRecordText(float distance, int carrot, int totalCarrot) {
+        _distanceRecordText.text = (int)distance + "m";
+        _carrotRecordText.text = carrot.ToString();
+        _carrotText.text = totalCarrot.ToString();
+    }
 
     public void BuildStartUI() {
         _startButton.gameObject.SetActive(true);
+        _playerInfoPanel.SetActive(true);
         _carrotPanel.SetActive(true);
 
         _distanceMeter.gameObject.SetActive(false);
@@ -34,7 +72,9 @@ public class MainPanel : MonoBehaviour
         _jumpBtn.gameObject.SetActive(false);
     }
     public void SetGameUI() {
+        SetRecordText(0, 0, 0);
         _startButton.gameObject.SetActive(false);
+        _playerInfoPanel.SetActive(false);
         _carrotPanel.SetActive(false);
 
         _distanceMeter.gameObject.SetActive(true);
@@ -43,15 +83,24 @@ public class MainPanel : MonoBehaviour
 
     }
 
-    public void OnClickPullBtn() {
+    public void OnClickPickupBtn() {
         _pullBtn.image.color = _pullBtn.colors.pressedColor;
+        // Player코드의 _pullAction.action.triggered가 호출되어야 함
+        _player._pickupAction.action.IsPressed();
     }
     public void OnClickJumpBtn() {
         _pullBtn.image.color = _pullBtn.colors.pressedColor;
+        // Player코드의 _jumpAction.action.triggered가 호출되어야 함
+        _player._jumpAction.action.IsPressed();
     }
     public void OnClickOptionBtn() {
         _pullBtn.image.color = _pullBtn.colors.pressedColor;
         // Pause Game
         Time.timeScale = 0;
+        pausePanel.SetActive(true);
+    }
+    
+    private void OnOptionActionTriggered(InputAction.CallbackContext context) {
+        OnClickOptionBtn();
     }
 }

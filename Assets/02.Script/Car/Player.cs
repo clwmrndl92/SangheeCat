@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
 {
     [Header("입력")]
     [SerializeField] private InputActionAsset _inputActionAsset;
-    [SerializeField] private InputActionReference _jumpAction;
-    [SerializeField] private InputActionReference _pickupAction;
+    [SerializeField] public InputActionReference _jumpAction;
+    [SerializeField] public InputActionReference _pickupAction;
     [Header("Physics Variables")]
     public Rigidbody2D rb;
     public float gravity;

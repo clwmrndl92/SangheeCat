@@ -388,6 +388,7 @@ MonoBehaviour:
   _retryBtn: {fileID: 5582132954450920317}
   _quitBtn: {fileID: 205412549653212611}
   _continueBtn: {fileID: 2943252953713514396}
+  _optionAction: {fileID: 179473620105479723, guid: 95d801d76ebb52246954d79007983a79, type: 3}
 --- !u!1 &367322571015371299
 GameObject:
   m_ObjectHideFlags: 0
@@ -3549,6 +3550,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 035dc475548cf6d449cd3d31b38d7e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _optionAction: {fileID: 179473620105479723, guid: 95d801d76ebb52246954d79007983a79, type: 3}
+  pausePanel: {fileID: 0}
+  _playerInfoPanel: {fileID: 0}
   _distanceMeter: {fileID: 5804949652899840149}
   _distanceRecordText: {fileID: 1139419479332965313}
   _carrotRecordText: {fileID: 7264157573809509496}
@@ -3557,7 +3561,7 @@ MonoBehaviour:
   _jumpBtn: {fileID: 6156284962993641793}
   _startButton: {fileID: 5492605164303388355}
   _carrotPanel: {fileID: 2687727520827482106}
-  _carrotText: {fileID: 0}
+  _carrotText: {fileID: 4332242421064350596}
 --- !u!1 &5216662664205635892
 GameObject:
   m_ObjectHideFlags: 0
