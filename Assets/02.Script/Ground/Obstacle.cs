@@ -10,9 +10,17 @@ public class Obstacle : MonoBehaviour
     public bool isBad = true;
     public bool isInitialized = false;
 
+    private CarrotPullOut _pullout;
+
     private void Awake()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
+        _pullout = GetComponent<CarrotPullOut>();
+        if(_pullout != null) {
+            _pullout._endPos = player.pulloutEnd.position;
+            _pullout._bezierPos = player.pulloutBezier.position;
+            _pullout.enabled = false;
+        } 
     }
 
     // Move the obstacle to the left based on the player's velocity
@@ -43,5 +51,10 @@ public class Obstacle : MonoBehaviour
 
         // Update the obstacle's position
         transform.position = pos;
+    }
+
+    public void pullOut() {
+        _pullout._startPos = transform.position;
+        if(_pullout != null) _pullout.enabled = true;
     }
 }

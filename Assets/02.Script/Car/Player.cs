@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
     public LayerMask pickupLayerMask;
     
     private Animator _animator;
+    public Transform pulloutEnd;
+    public Transform pulloutBezier;
 
     void Awake()
     {
@@ -88,6 +90,7 @@ public class Player : MonoBehaviour
         if(_pickupAction.action.triggered)
         {
             Debug.Log("Pickup");
+            checkPickup();
         }
     }
     
@@ -287,12 +290,15 @@ public class Player : MonoBehaviour
             // Hurt 트리거로 Hurt 애니메이션 재생
             _animator.SetTrigger("Hurt");
             //TODO: Obstacle 애니메이션 재생
+            obstacle.pullOut();
         }
         else
         {
+            Debug.Log("Good Carrot");
             //TODO: 점수 증가
             
             //TODO: Obstacle 애니메이션 재생
+            obstacle.pullOut();
         }
     }
 }
