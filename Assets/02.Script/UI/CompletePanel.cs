@@ -19,7 +19,7 @@ public class CompletePanel : MonoBehaviour
         _player = GameObject.Find("Player").GetComponent<Player>();
         
         _distanceText.text = (int)_player.distance + "m";
-        _carrotText.text = "0";
+        _carrotText.text = _player.currentCarrotNum.ToString();
 
         _retryBtn.onClick.AddListener(OnClickRetryBtn);
         _quitBtn.onClick.AddListener(OnClickQuitBtn);

@@ -19,7 +19,7 @@ public class DistanceMeter : MonoBehaviour
         _player = GameObject.Find("Player").GetComponent<Player>();
         
         //TODO: SetRecord from save data
-        SetRecord(0.5f, true);
+        SetRecord(PlayerPrefs.GetInt("highDistance") / 1000f, true);
     }
     
     /// <summary>
@@ -34,6 +34,10 @@ public class DistanceMeter : MonoBehaviour
     /// </summary>
     /// <param name="position"></param>
     public void SetRecord(float position, bool setActive = true){
+        if (position <= 0.001f)
+        {
+            return;
+        }
         _record.transform.position = Vector3.Lerp(_start.position, _end.position, position);
         _record.SetActive(setActive);
     }

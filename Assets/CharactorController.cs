@@ -11,6 +11,8 @@ public class CharactorController : MonoBehaviour
     private const float WHEELspeed = 1f;
 
     private Animator _animator;
+    
+    Player player;
 
     private enum CharactorState
     {
@@ -27,6 +29,7 @@ public class CharactorController : MonoBehaviour
     private void Awake() 
     {
         _animator = GetComponent<Animator>();
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     void Start()
@@ -43,7 +46,8 @@ public class CharactorController : MonoBehaviour
 
     void RunUpdate()
     {
-        _animator.speed = speed;
+        speed = player.velocity.x / 7.5f;
+        _animator.speed = 2f;
         _bigWheel.transform.Rotate(speed * WHEELspeed * Vector3.back);
         foreach (var sw in _smallWheel)
         {

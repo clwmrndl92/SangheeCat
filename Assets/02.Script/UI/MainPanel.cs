@@ -39,7 +39,7 @@ public class MainPanel : MonoBehaviour
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         //TODO: SetRecordText from save data
-        SetRecordText(500, 12, 2024);
+        SetRecordText(PlayerPrefs.GetInt("highDistance"), PlayerPrefs.GetInt("highCarrot"), PlayerPrefs.GetInt("carrot"));
     }
 
     private void Start() {
@@ -54,7 +54,7 @@ public class MainPanel : MonoBehaviour
             return;
         }
         _distanceRecordText.text = (int)_player.distance + "m";
-        _carrotRecordText.text = _player.currentCarrotNum+"/"+_player.maxCarrotNum;
+        _carrotRecordText.text = _player.currentCarrotNum.ToString();
         _carrotText.text = _player.totalCarrotNum.ToString();
     }
     

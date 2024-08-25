@@ -233,10 +233,10 @@ MonoBehaviour:
   - {fileID: 7508373800853197042, guid: 214ad1bd5bd7827468085ce52f102c76, type: 3}
   - {fileID: 7508373800853197042, guid: 068d864374cb4c544ba7fc8918c1ef3d, type: 3}
   obstacleProbabilities:
-  - 0.15
-  - 0.3
+  - 0.1
+  - 0.2
   - 0.45
-  - 0.625
+  - 0.7
   - 0.8
   - 1
 --- !u!61 &2895586130189449277

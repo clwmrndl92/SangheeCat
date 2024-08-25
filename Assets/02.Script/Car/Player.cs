@@ -58,12 +58,15 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();   
         _animator = GetComponentInChildren<Animator>();
         
+        if (!PlayerPrefs.HasKey("highDistance"))
+            PlayerPrefs.SetInt("highDistance", 0);
+        if (!PlayerPrefs.HasKey("highCarrot"))
+            PlayerPrefs.SetInt("highCarrot", 0);
     	if(!PlayerPrefs.HasKey("carrot"))
     	    PlayerPrefs.SetInt("carrot", 0);
-    	if(!PlayerPrefs.HasKey("maxCarrot"))
-    	    PlayerPrefs.SetInt("carrot", 0);
+        
         totalCarrotNum = PlayerPrefs.GetInt("carrot");
-        maxCarrotNum = PlayerPrefs.GetInt("maxCarrot");
+        maxCarrotNum = PlayerPrefs.GetInt("highCarrot");
         currentCarrotNum = 0;
     }
     
@@ -113,7 +116,8 @@ public class Player : MonoBehaviour
         
         PlayerPrefs.SetInt("carrot", totalCarrotNum);
         if(maxCarrotNum < currentCarrotNum)
-            PlayerPrefs.SetInt("maxCarrot", currentCarrotNum);
+            PlayerPrefs.SetInt("highCarrot", currentCarrotNum);
+        PlayerPrefs.SetInt("highDistance", (int)distance);
     }
 
     private void FixedUpdate()
